@@ -1,0 +1,1 @@
+module.exports = {host:'sql12.freemysqlhosting.net',user:'sql12327739',password:'Nbm6jsnFIf',database:'sql12327739'}
