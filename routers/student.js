@@ -10,5 +10,16 @@ router.post('/list', async (req, res) => {
     const results = await query(conn, `SELECT * FROM task WHERE assigned_to=${id}`).catch(console.log);
     res.json({ results });
 })
+router.post('/updateCompletion', async (req, res) => {
+    let qstring = ``;
+    for (x in req.body){
+        qstring+=`UPDATE task SET completion=${req.body[x]} WHERE id=${x};`
+    }
+    newConfig = {...dbConfig};
+    newConfig.multipleStatements = true;
+    const conn = await connection(newConfig).catch(e => {console.log("Error establishing connection to DB!")}) 
+    await query(conn,qstring).catch(e => console.log(e));
+    res.end();
+})
 
 module.exports = router;

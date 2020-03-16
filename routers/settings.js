@@ -4,17 +4,6 @@ const dbConfig = require('../db_helpers/cred');
 const connection = require('../db_helpers/connection');
 const query = require('../db_helpers/query');
 
-// router.post('/add', async (req, res) => {
-//     const {name,deadline,assigned_to,details} = req.body; 
-//     const conn = await connection(dbConfig).catch(e => {console.log("Error establishing connection to DB!")}) 
-//     if(assigned_to === undefined) 
-//     await query(conn, `INSERT INTO task(name,deadline,details) VALUES('${name}','${deadline}','${details}')`).catch(e=>res.send(e));
-//     else
-//     await query(conn, `INSERT INTO task(name,deadline,assigned_to,details) VALUES('${name}','${deadline}','${assigned_to}','${details}')`).catch(e=>res.send(e));
-    
-//     res.end()
-// })
-
 router.post('/editProfInfo', async(req,res)=>{
     const {id,name,deadline,assigned_to,details} = req.body; 
     const conn = await connection(dbConfig).catch(e => {console.log("Error establishing connection to DB!")}) 
@@ -35,5 +24,11 @@ router.post('/getStudentInfo', async (req, res) => {
     const conn = await connection(dbConfig).catch(e => {console.log("Error establishing connection to DB!")}) 
     const results = await query(conn, `SELECT * FROM ra WHERE id=${id}`).catch(console.log);
     res.json(results);
+})
+router.post('/addNewProfessor', async (req, res) => {
+    const {name} = req.body;
+    const conn = await connection(dbConfig).catch(e => {console.log("Error establishing connection to DB!")}) 
+    const insertion = await query(conn, `INSERT INTO Professors(name) VALUES('${name}');`).catch(console.log);
+    res.json({id: insertion.insertId});
 })
 module.exports = router;

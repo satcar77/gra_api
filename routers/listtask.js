@@ -39,4 +39,11 @@ router.post('/edit', async(req,res)=>{
     console.log(`Edited ${id}`);
    
 })
+router.post('/studentList', async (req, res) => {
+    const {id} = req.body;
+    const conn = await connection(dbConfig).catch(e => {console.log("Error establishing connection to DB!")}) 
+    const profid = await query(conn, `SELECT Professors.id FROM Professors INNER JOIN ra ON Professors.id = ra.created_by WHERE ra.id = ${id}`).catch(console.log);
+    const results = await query(conn, `SELECT task.id,task.name,task.deadline,task.details,ra.name as assigned_to,task.completion FROM task LEFT JOIN ra ON task.assigned_to=ra.id WHERE task.created_by =${profid[0].id}`).catch(console.log);
+    res.json({ results });
+})
 module.exports = router;

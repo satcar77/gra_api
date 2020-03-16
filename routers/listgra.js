@@ -32,6 +32,13 @@ router.post('/edit', async(req,res)=>{
     console.log(`Edited ${id}`);
    
 })
+router.post('/updateStatus', async(req,res)=>{
+    const { id,status } = req.body;
+    const conn = await connection(dbConfig).catch(e => {console.log("Error establishing connection to DB!")}) 
+    await query(conn, `UPDATE ra SET status = '${status}' WHERE id =${id}`).catch(e => console.log(e));
+    res.end()
+})
+
 
 
 module.exports = router;
