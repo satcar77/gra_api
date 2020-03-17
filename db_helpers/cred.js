@@ -1,1 +1,1 @@
-module.exports = {host:'sql12.freemysqlhosting.net',user:'sql12327739',password:'Nbm6jsnFIf',database:'sql12327739'}
+module.exports = {host:'160.153.58.137',user:'satcar',password:'satkar1234',database:'gra_react'}

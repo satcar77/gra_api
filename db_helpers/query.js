@@ -1,11 +1,12 @@
-module.exports = async (conn, q, params) => new Promise(
+module.exports = async (conn, q) => new Promise(
 (resolve, reject) => {
-  const handler = (error, result) => {
+  const handler = (error, result,fields) => {
+    conn.release();
 	  if (error) {
       reject(error);
       return;
     }
     resolve(result);
   }
-  conn.query(q, params, handler);
+  conn.query(q, handler);
 });
