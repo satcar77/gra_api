@@ -1,1 +1,1 @@
-module.exports = {host:'160.153.58.137',user:'satcar',password:'satkar1234',database:'gra_react'}
+module.exports = {host:'172.17.0.2',user:'root',password:'satkar1234',database:'gra'}
