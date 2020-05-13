@@ -1,14 +1,15 @@
 const mysql = require('mysql');
 const dbConfig = require('../db_helpers/cred');
 
-const connection = mysql.createConnection(dbConfig);
+const pool = mysql.createPool(dbConfig);
+
 module.exports = async () => new Promise(
 (resolve, reject) => {
-      connection.connect((err)=>{
-        if(err){
-          reject(err);
-          return;
-        }
-        resolve(connection);
-      })
+	pool.getConnection((err,connection)=>{
+    if(err){
+      reject(error);
+      return;
+    }
+    resolve(connection)
+  });
 });
